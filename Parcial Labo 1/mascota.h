@@ -46,16 +46,6 @@ void hardcodearMascota(sMascota mascota[],int tam);
  */
 void mostrarMascota(sMascota mascota[],int tam, int ocupado);
 
-/** \brief busca un a estructura libre(estado=libre) y permite ingresar datos en la misma y marcarla como activa(estado=ocupado)
- *
- * \param sMascota mascota[] Array de estructuras sMascota
- * \param int tam tamaño del array
- * \param int ocupado valor de estado
- * \return int devuelve -1 si no hay estructuras libres o la posicion en el array de la estructura en la que se ingresaron los datos
- *
- */
-int altaMascota(sMascota mascota[],int tam, int libre, int ocupado);
-
 /** \brief busca un a estructura activa(estad=ocupado) por ID y la marca como libre o inactiva(estado=libre)
  *
  * \param sMascota mascota[] Array de estructuras sMascota

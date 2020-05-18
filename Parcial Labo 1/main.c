@@ -16,8 +16,8 @@ sCliente cliente[10];
 sMascota mascota[20];
 inicializarCliente(cliente,CLIENTES,LIBRE);
 inicializarMascota(mascota,MASCOTAS,LIBRE);
-//hardcodearCliente(cliente,CLIENTES);
-//hardcodearMascota(mascota,MASCOTAS);
+hardcodearCliente(cliente,CLIENTES);
+hardcodearMascota(mascota,MASCOTAS);
 printf("------|| Menu de la veterinaria ||------\n");
 do
     {
@@ -27,6 +27,7 @@ do
     fflush(stdin);
     eleccion=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,3,1);
     system("cls");
+    system("color 0F");
     switch(eleccion)
         {
         case 1:
@@ -42,11 +43,12 @@ do
                 printf("6.Mostrar Clientes con mas de dos Mascotas\n");
                 printf("7.Mostrar Clientes ordenados por cantidad de mascotas\n");
                 printf("8.Mostrar Clientes ordenados por cantidad de mascotas y nombre\n");
-                printf("9.Mostrar cantidad de Clientes y Porcentajes de Sexos\n");
+                printf("9.Mostrar cantidad de Clientes y otros datos\n");
                 printf("10.Volver al menu principal\n");
                 fflush(stdin);
                 eleccionCliente=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,19,1);
                 system("cls");
+                system("color 0F");
                 if(cantClientes(cliente,CLIENTES,OCUPADO)==0&&eleccionCliente!=1)
                     {
                     printf("No hay ningun Cliente ingresado, para seguir ingrese uno a continuacion\n");
@@ -99,7 +101,7 @@ do
                         }
                     case 9:
                         {
-                        porcentajeDeHombresYMujeres(cliente,CLIENTES,OCUPADO);
+                        calculoDeHombresYMujeres(cliente,CLIENTES,OCUPADO);
                         break;
                         }
                     case 10:
@@ -121,6 +123,8 @@ do
                     do
                     {
                     vincluarClienteAMascota(mascota,MASCOTAS,cliente,CLIENTES,OCUPADO);
+                    calcularMascotasPorCliente(mascota,MASCOTAS,cliente,CLIENTES,OCUPADO);
+                    int aux=cantMascotas(mascota,MASCOTAS,OCUPADO);
                     printf("1.Ingresar Mascotas\n");
                     printf("2.Modificar Mascotas\n");
                     printf("3.Eliminar Mascotas\n");
@@ -134,7 +138,8 @@ do
                     fflush(stdin);
                     eleccionMascota=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,10,1);
                     system("cls");
-                    if(cantMascotas(mascota,MASCOTAS,OCUPADO)==0 && eleccionMascota!=1)
+                    system("color 0F");
+                    if(aux==0 && eleccionMascota!=1)
                         {
                         printf("No hay ninguna Mascota ingresada, para seguir ingrese una a continuacion\n");
                         eleccionMascota=1;
@@ -145,7 +150,7 @@ do
                             {
                             printf("Clientes Actuales\n");
                             mostrarCliente(cliente,CLIENTES,OCUPADO);
-                            altaMascota(mascota,MASCOTAS,LIBRE,OCUPADO);
+                            altaMascota(mascota,MASCOTAS,cliente,CLIENTES,LIBRE,OCUPADO);
                             break;
                             }
                         case 2:

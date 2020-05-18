@@ -68,3 +68,16 @@ void calcularMascotasPorCliente(sMascota mascota[],int tamMascota,sCliente clien
  */
 void mostrarClientesConMasDeUnaMascota(sCliente cliente[],int tamCliente,int ocupado);
 
+/** \brief busca un a estructura libre(estado=libre) y permite ingresar datos en la misma y marcarla como activa(estado=ocupado)
+ *
+ * \param sMascota mascota[] Array de estructuras sMascota
+ * \param int tamMascota tamaño del array sMascota
+ * \param sCliente cliente[] Array de estructuras sCliente
+ * \param int tamCliente tamaño del array sCliente
+ * \param int ocupado valor de estado
+
+ * \return int devuelve -1 si no hay estructuras libres o la posicion en el array de la estructura en la que se ingresaron los datos
+ *
+ */
+int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente ,int libre ,int ocupado);
+

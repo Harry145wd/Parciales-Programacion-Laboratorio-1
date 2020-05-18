@@ -79,10 +79,12 @@ int buscarClienteLibre(sCliente cliente[],int tam ,int libre);
  * \param sCliente cliente[] Array de estructuras sCliente
  * \param int tam tamaño del array
  * \param int libre valor de estado
+ * \param int opcion (0 para que la funcion pida la ID o 1 para usar la id pasada por parametro)
+ * \param int id id de cliente a buscar
  * \return int devuelve -1 si no hay coincidencias o la posicion en el array de la estructura con ID coincidente
  *
  */
-int buscarCliente(sCliente cliente[],int tam ,int ocupado);
+int buscarCliente(sCliente cliente[],int tam ,int ocupado ,int opcion, int id);
 
 /** \brief busca una estructura por ID y permite modificar datos de la misma si esta activa(estado=ocupado)
  *
@@ -135,7 +137,7 @@ void ordenarClientePorCantMascotasYNombre(sCliente cliente[],int tam,int ocupado
  * \return void
  *
  */
-void porcentajeDeHombresYMujeres(sCliente cliente[],int tam, int ocupado);
+void calculoDeHombresYMujeres(sCliente cliente[],int tam, int ocupado);
 
 /** \brief muestra todas las estructuras cuyo valor cantMascotas sea mayor a 1
  *

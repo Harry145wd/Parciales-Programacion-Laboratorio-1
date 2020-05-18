@@ -76,34 +76,6 @@ for(i=0;i<tam;i++)
 return retorno;
 }
 
-int altaMascota(sMascota mascota[],int tam,int libre,int ocupado)
-{
-int aux;
-aux=buscarMascotaLibre(mascota,tam,libre);
-int retorno=-1;
-if(aux!=-1)
-    {
-    getString(mascota[aux].nombre,"Ingrese el Nombre: ");
-    do
-    {
-    getString(mascota[aux].tipo,"Ingrese el Tipo Perro,Gato o Raro): ");
-    }while((strcmpi(mascota[aux].tipo,"Perro")==0||strcmpi(mascota[aux].tipo,"Gato")==0||strcmpi(mascota[aux].tipo,"Raro")==0)!=1);
-    getString(mascota[aux].raza,"Ingrese la Raza: ");
-    mascota[aux].edad=getInt("Ingrese Edad: ","",0,0,0);
-    mascota[aux].peso=getFloat("Ingrese Peso: ","",0,0,0);
-    do
-    {
-    mascota[aux].sexo=getChar("Ingrese sexo ('M'o?'H'): ","",0,0,0);
-    }while((mascota[aux].sexo=='M'||mascota[aux].sexo!='H')!=1);
-    mascota[aux].idCliente=getInt("Ingrese ID del dueño: ","",0,0,0);
-    mascota[aux].idMascota=generarIDMascota(mascota,tam);
-    mascota[aux].estado=ocupado;
-    printf("Agregado exitosamente\n");
-    retorno=aux;
-    }
-return retorno;
-}
-
 int generarIDMascota(sMascota mascota[],int tam)
 {
 int i;
@@ -130,6 +102,7 @@ for(i=0;i<tam;i++)
         {
         printf("Se encontro la mascota, se dara de baja\n");
         mascota[i].estado=libre;
+        system("color 2F");
         retorno=i;
         }
     }

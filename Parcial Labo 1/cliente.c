@@ -32,6 +32,7 @@ for(i=0;i<tam;i++)
     {
     cliente[i].estado=libre;
     cliente[i].idCliente=0;
+    cliente[i].cantMascotas=0;
     }
 }
 
@@ -76,6 +77,7 @@ if(aux!=-1)
         }while(cliente[aux].sexo!='M' && cliente[aux].sexo!='F');
     cliente[aux].idCliente=generarIDCliente(cliente,tam);
     cliente[aux].estado=ocupado;
+    system("color 2F");
     printf("Agregado exitosamente\n");
     retorno=aux;
     }
@@ -111,16 +113,27 @@ for(i=0;i<tam;i++)
 return retorno;
 }
 
-int buscarCliente(sCliente cliente[],int tam ,int ocupado)
+int buscarCliente(sCliente cliente[],int tam ,int ocupado ,int opcion, int id)
 {
 int i;
-int aux=getInt("Ingrese una ID: ","",0,0,0);
 int retorno = -1;
+int aux;
+if(opcion==0)
+    {
+    aux=getInt("Ingrese una ID: ","",0,0,0);
+    }
+else if(opcion==1)
+    {
+    aux=id;
+    }
 for(i=0;i<tam;i++)
     {
     if(cliente[i].estado==ocupado && cliente[i].idCliente==aux)
         {
+        if(opcion==0)
+        {
         printf("Se ha encontrado una coincidencia\n");
+        }
         retorno = i;
         break;
         }
@@ -134,7 +147,7 @@ int aux;
 int i;
 int eleccion;
 int retorno=-1;
-aux=buscarCliente(cliente,tam,ocupado);
+aux=buscarCliente(cliente,tam,ocupado,0,0);
 if(aux!=-1)
     {
     printf("Se encontro el Cliente, elija que modificara: \n");
@@ -255,12 +268,16 @@ for(i=0;i<tam-1;i++)
     }
 }
 
-void porcentajeDeHombresYMujeres(sCliente cliente[],int tam, int ocupado)
+void calculoDeHombresYMujeres(sCliente cliente[],int tam, int ocupado)
 {
 int i;
+int edadHombres=0;
+int edadMujeres=0;
+float promedioEdadMujeres;
+float promedioEdadHombres;
 int cantHombres=0;
 int cantMujeres=0;
-int totalClientes=0;
+float totalClientes=0;
 float porcentajeHombres;
 float porcentajeMujeres;
 for(i=0;i<tam;i++)
@@ -268,21 +285,25 @@ for(i=0;i<tam;i++)
     if(cliente[i].sexo=='M')
         {
         cantHombres++;
+        edadHombres+=cliente[i].edad;
         totalClientes++;
         }
     else if(cliente[i].sexo=='F')
         {
         cantMujeres++;
+        edadMujeres+=cliente[i].edad;
         totalClientes++;
         }
     }
 if(totalClientes>0)
     {
-    printf("La cantidad de clientes es: %d\n",totalClientes);
+    printf("La cantidad de clientes es: %.2f\n",totalClientes);
     if(cantHombres>0)
         {
         porcentajeHombres=cantHombres*100.00/totalClientes;
-        printf("El porcentaje de Clientes Hombres es: %.2f\n",porcentajeHombres);
+        promedioEdadHombres=edadHombres/cantHombres;
+        printf("El porcentaje de Clientes Hombres es:%% %5.2f\n",porcentajeHombres);
+        printf("El promedio de edad de Clientes Hombres es: %5.2f\n", promedioEdadHombres);
         }
     else
         {
@@ -291,7 +312,9 @@ if(totalClientes>0)
     if(cantMujeres>0)
         {
         porcentajeMujeres=cantMujeres*100.00/totalClientes;
-        printf("El porcentaje de Clientes Mujeres es: %.2f\n",porcentajeMujeres);
+        promedioEdadMujeres=edadHombres/cantMujeres;
+        printf("El porcentaje de Clientes Mujeres es:%% %5.2f\n",porcentajeMujeres);
+        printf("El promedio de edad de Clientes Mujeres es: %5.2f\n", promedioEdadMujeres);
         }
     else
         {
