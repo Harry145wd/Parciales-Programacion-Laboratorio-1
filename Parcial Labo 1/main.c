@@ -19,11 +19,9 @@ sRaza raza[RAZAS];
 inicializarCliente(cliente,CLIENTES,LIBRE);
 inicializarMascota(mascota,MASCOTAS,LIBRE);
 inicializarRaza(raza,RAZAS);
-mostrarRaza(raza,RAZAS,OCUPADO);
 hardcodearCliente(cliente,CLIENTES);
 hardcodearMascota(mascota,MASCOTAS);
 hardcodearRaza(raza,RAZAS);
-mostrarRaza(raza,RAZAS,OCUPADO);
 printf("------|| Menu de la veterinaria ||------\n");
 do
     {
@@ -50,9 +48,10 @@ do
                 printf("7.Mostrar Clientes ordenados por cantidad de mascotas\n");
                 printf("8.Mostrar Clientes ordenados por cantidad de mascotas y nombre\n");
                 printf("9.Mostrar cantidad de Clientes y otros datos\n");
-                printf("10.Volver al menu principal\n");
+                printf("10.Mostrar clientes que tienen al menos una mascota del mismo sexo\n");
+                printf("11.Volver al menu principal\n");
                 fflush(stdin);
-                eleccionCliente=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,19,1);
+                eleccionCliente=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,11,1);
                 system("cls");
                 system("color 0F");
                 if(cantClientes(cliente,CLIENTES,OCUPADO)==0&&eleccionCliente!=1)
@@ -84,7 +83,7 @@ do
                         }
                     case 5:
                         {
-                        mostrarClienteConSusMascotas(mascota,MASCOTAS,cliente,CLIENTES,OCUPADO);
+                        mostrarClienteConSusMascotas(mascota,MASCOTAS,cliente,CLIENTES,raza,RAZAS,OCUPADO);
                         break;
                         }
                     case 6:
@@ -112,10 +111,16 @@ do
                         }
                     case 10:
                         {
+                        mostrarCconMMismoSexo(mascota,MASCOTAS,cliente,CLIENTES,OCUPADO);
+                        break;
+                        }
+                    case 11:
+                        {
                         printf("Vuelta al Menu principal\n");
+                        break;
                         }
                     }
-                }while(eleccionCliente!=10);
+                }while(eleccionCliente!=11);
             break;
             }
         case 2:
@@ -175,23 +180,23 @@ do
                             }
                         case 4:
                             {
-                            mostrarMascota(mascota,MASCOTAS,OCUPADO);
+                            mostrarMascota(mascota,MASCOTAS,raza,RAZAS,OCUPADO);
                             break;
                             }
                         case 5:
                             {
                             ordenarMascotasPorTipo(mascota,MASCOTAS,OCUPADO);
-                            mostrarMascota(mascota,MASCOTAS,OCUPADO);
+                            mostrarMascota(mascota,MASCOTAS,raza,RAZAS,OCUPADO);
                             break;
                             }
                         case 6:
                             {
-                            mascotasMayoresA3(mascota,MASCOTAS,OCUPADO);
+                            mascotasMayoresA3(mascota,MASCOTAS,raza,RAZAS,OCUPADO);
                             break;
                             }
                         case 7:
                             {
-                            mostrarMascotaPorTipo(mascota,MASCOTAS,OCUPADO);
+                            mostrarMascotaPorTipo(mascota,MASCOTAS,raza,RAZAS,OCUPADO);
                             break;
                             }
                         case 8:

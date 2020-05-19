@@ -43,6 +43,7 @@ int buscarRazaLibre(sRaza raza[],int tam, int libre);
 
 int buscarRaza(sRaza raza[],int tam, int ocupado,int id, int opcion);
 
+void mostrarRaza(sRaza raza[],int tam,int ocupado);
 
 
 /** \brief inicializa valores del el array como el estado y la ID de cada estructura
@@ -72,7 +73,7 @@ void hardcodearMascota(sMascota mascota[],int tam);
  * \return void
  *
  */
-void mostrarMascota(sMascota mascota[],int tam, int ocupado);
+void mostrarMascota(sMascota mascota[],int tam , sRaza raza[],int tamRaza, int ocupado);
 
 /** \brief busca un a estructura activa(estad=ocupado) por ID y la marca como libre o inactiva(estado=libre)
  *
@@ -132,7 +133,7 @@ int buscarMascota(sMascota mascota[],int tam,int ocupado, int id, int opcion);
  * \return void
  *
  */
-void ordenarMascotasPorTipo(sMascota mascota[],int tam, int ocupado);
+void ordenarMascotasPorTipo(sMascota mascota[],int tam,int ocupado);
 
 /** \brief muestra la estructura en la posicion del array coincidente al parametro index
  *
@@ -142,7 +143,7 @@ void ordenarMascotasPorTipo(sMascota mascota[],int tam, int ocupado);
  * \return void
  *
  */
-void mostrarUnaMascota(sMascota mascota[],int tam, int index);
+void mostrarUnaMascota(sMascota mascota[],int tam,sRaza raza[],int tamRaza, int index, int ocupado);
 
 /** \brief muestra todas las estructuras activas cuyo valor edad sea mayor a 3
  *
@@ -152,7 +153,7 @@ void mostrarUnaMascota(sMascota mascota[],int tam, int index);
  * \return void
  *
  */
-void mascotasMayoresA3(sMascota mascota[],int tam, int ocupado);
+void mascotasMayoresA3(sMascota mascota[],int tam,sRaza raza[],int tamRaza,int ocupado);
 
 /** \brief muestra las estructuras dependiendo del valor tipo elegido
  *
@@ -162,7 +163,7 @@ void mascotasMayoresA3(sMascota mascota[],int tam, int ocupado);
  * \return void
  *
  */
-void mostrarMascotaPorTipo(sMascota mascota[],int tam, int ocupado);
+void mostrarMascotaPorTipo(sMascota mascota[],int tam,sRaza raza[], int tamRaza, int ocupado);
 
 /** \brief si el parametro Modo = 0 calcula y muestra el promedio del valor edad de todas las estructuras activas
  *         si el parametro modo = 1 pregunta que promedio de edad quiere calcularse segun su valor tipo y lo muestra

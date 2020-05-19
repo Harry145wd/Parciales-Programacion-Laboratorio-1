@@ -12,7 +12,7 @@
  * \return void
  *
  */
-void mostrarClienteConSusMascotas(sMascota mascota[], int tamMascota,sCliente cliente[],int tamCliente,int ocupado);
+void mostrarClienteConSusMascotas(sMascota mascota[], int tamMascota,sCliente cliente[],int tamCliente,sRaza raza[],int tamRaza,int ocupado);
 
 /** \brief introduce el valor Nombre de las estrucuras del array cliente
  * en el valor nombreCliente de las estructuras del array mascota mediante coincidencia del valor idCliente
@@ -81,3 +81,4 @@ void mostrarClientesConMasDeUnaMascota(sCliente cliente[],int tamCliente,int ocu
  */
 int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamClientes,sRaza raza[],int tamRaza ,int libre ,int ocupado);
 
+void mostrarCconMMismoSexo(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente,int ocupado);

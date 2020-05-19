@@ -7,7 +7,7 @@ void hardcodearMascota(sMascota mascota[],int tam)
     int idCliente[20]={1,1,2,2,2,3,3,4,5,5,5};
     char nombre[20][20]={"Michin","Michino","Bobby","Bobinho","Minino","Bonno","Keckleon","Bobifus","Michifus","Michifusino","Buu"};
     char tipo[20][20]={"Gato","Gato","Perro","Perro","Gato","Perro","Raro","Perro","Gato","Gato","Perro"};
-    int raza[20][20]={1,2,3,4,5,6,1,2,3,4,5};
+    int raza[20]={1,2,3,4,1,3,5,4,1,2,3};
     int edad[20]={12,3,9,4,16,7,8,14,2,12,8};
     float peso[20]={12.3,13.2,14.33423,14.2,12.4,1.23,14.5,15.6,2.34,12.4,32.50};
     char sexo[20]={'F','F','M','M','M','M','F','M','M','M','M'};
@@ -29,7 +29,7 @@ void hardcodearMascota(sMascota mascota[],int tam)
 
 void hardcodearRaza(sRaza raza[], int tam)
 {
-char nombre[10][20]={"Persa","siames","labrador","pitbull","lagartija","ardilla"};
+char nombre[10][20]={"Persa","Siames","Labrador","Pitbull","Lagartija","Ardilla"};
 char tipo[10][20]={"Gato","Gato","Perro","Perro","Raro","Raro"};
 char pais[10][20]={"Argentina","Chile","Brasil","Bolivia","Venezuela","Australia"};
 int id[10]={1,2,3,4,5,6};
@@ -76,11 +76,11 @@ for(i=0;i<tam;i++)
         may=raza[i].idRaza;
         }
     }
+return may+1;
 }
 
 int altaRaza(sRaza raza[],int tam, int libre, int ocupado)
 {
-int i;
 int retorno=-1;
 int aux=buscarRazaLibre(raza,tam,libre);
 if(aux!=-1)
@@ -110,7 +110,9 @@ int aux;
 int aux2=0;
 int i;
 int retorno=-1;
+mostrarRaza(raza,tam,ocupado);
 aux=getInt("Ingrese id de la raza que quiere eliminar: ","",0,0,0);
+
 for(i=0;i<tam;i++)
     {
     if(raza[i].idRaza==aux && raza[i].estado==ocupado)
@@ -122,9 +124,9 @@ for(i=0;i<tam;i++)
         retorno=i;
         }
     }
-if(aux==0)
+if(aux2==0)
 {
-printf("no se encontro ninguna raza\n");
+printf("no se encontro ninguna raza con ese ID\n");
 }
 return retorno;
 }
@@ -182,7 +184,7 @@ int buscarRaza(sRaza raza[],int tam, int ocupado,int id, int opcion)
 {
  int i;
 int retorno = -1;
-int aux;
+int aux=-1;
 if(opcion==0)
     {
     aux=getInt("Ingrese una ID: ","",0,0,0);
@@ -206,7 +208,6 @@ for(i=0;i<tam;i++)
 return retorno;
 }
 
-
 void mostrarRaza(sRaza raza[],int tam, int ocupado)
 {
 int i;
@@ -221,10 +222,12 @@ for(i=0;i<tam;i++)
         printf("|%15s",raza[i].nombre);
         printf("|%15s",raza[i].tipo);
         printf("|%15s",raza[i].pais);
-        printf("|%6d",raza[i].idRaza);
+        printf("|%6d|",raza[i].idRaza);
+        printf("\n");
         }
     }
-if(aux=0)
+printf("\n");
+if(aux==0)
     {
     printf("No se ha ingresado ninguna raza\n");
     }
@@ -245,9 +248,10 @@ for(i=0;i<tam;i++)
 return retorno;
 }
 
-void mostrarMascota(sMascota mascota[],int tam, int ocupado)
+void mostrarMascota(sMascota mascota[],int tam , sRaza raza[],int tamRaza ,int ocupado)
 {
 int i;
+int aux;
 char space=' ';
 printf("|%9cNOMBRE|%11cTIPO|%11cRAZA| EDAD|%2cPESO| SEXO|%4cID|ID DEL DUEÑO|%4cNOMBRE DEL DUEÑO|\n\n",space,space,space,space,space,space);
 for(i=0;i<tam;i++)
@@ -256,7 +260,8 @@ for(i=0;i<tam;i++)
         {
         printf("|%15s",mascota[i].nombre);
         printf("|%15s",mascota[i].tipo);
-        printf("|%15s",mascota[i].raza);
+        aux=buscarRaza(raza,tamRaza,ocupado,mascota[i].raza,1);
+        printf("|%15s",raza[aux].nombre);
         printf("|%5d",mascota[i].edad);
         printf("|%6.2f",mascota[i].peso);
         printf("|%5c",mascota[i].sexo);
@@ -354,7 +359,7 @@ aux=buscarMascota(mascota,tam,ocupado,0,0);
                     }
                 case 3:
                     {
-                     getString(mascota[aux].raza,"Ingrese la Raza: ");
+                     mascota[aux].raza=getInt("Ingrese la Raza: ","",0,0,0);
                     break;
                     }
                 case 4:
@@ -391,7 +396,7 @@ int buscarMascota(sMascota mascota[],int tam,int ocupado,int id, int opcion)
 {
 int i;
 int retorno = -1;
-int aux;
+int aux= -1;
 if(opcion==0)
     {
     aux=getInt("Ingrese una ID: ","",0,0,0);
@@ -436,11 +441,12 @@ for(i=0;i<tam-1;i++)
     }
 }
 
-void mostrarUnaMascota(sMascota mascota[],int tam, int index)
+void mostrarUnaMascota(sMascota mascota[],int tam,sRaza raza[],int tamRaza, int index, int ocupado)
 {
+int aux=buscarRaza(raza,tamRaza,ocupado,mascota[index].raza,1);
 printf("|%15s|%15s|%15s|%5d|%6.2f|%5c|%6d|%12d|%20s|\n",mascota[index].nombre
                                                         ,mascota[index].tipo
-                                                        ,mascota[index].raza
+                                                        ,raza[aux].nombre
                                                         ,mascota[index].edad
                                                         ,mascota[index].peso
                                                         ,mascota[index].sexo
@@ -449,7 +455,7 @@ printf("|%15s|%15s|%15s|%5d|%6.2f|%5c|%6d|%12d|%20s|\n",mascota[index].nombre
                                                         ,mascota[index].nombreCliente);
 }
 
-void mascotasMayoresA3(sMascota mascota[],int tam, int ocupado)
+void mascotasMayoresA3(sMascota mascota[],int tam,sRaza raza[],int tamRaza,int ocupado)
 {
 int i;
 char space=' ';
@@ -458,12 +464,12 @@ for(i=0;i<tam;i++)
     {
     if(mascota[i].estado==ocupado && mascota[i].edad>3)
         {
-        mostrarUnaMascota(mascota,tam,i);
+        mostrarUnaMascota(mascota,tam,raza,tamRaza,i,ocupado);
         }
     }
 }
 
-void mostrarMascotaPorTipo(sMascota mascota[],int tam, int ocupado)
+void mostrarMascotaPorTipo(sMascota mascota[],int tam,sRaza raza[], int tamRaza, int ocupado)
 {
 
 int i;
@@ -478,7 +484,7 @@ for(i=0;i<tam;i++)
             {
             if(strcmpi(mascota[i].tipo,"Perro")==0)
                 {
-                mostrarUnaMascota(mascota,tam,i);
+                mostrarUnaMascota(mascota,tam,raza,tamRaza,i,ocupado);
                 }
             break;
             }
@@ -486,7 +492,7 @@ for(i=0;i<tam;i++)
             {
             if(strcmpi(mascota[i].tipo,"Gato")==0)
                 {
-                mostrarUnaMascota(mascota,tam,i);
+                mostrarUnaMascota(mascota,tam,raza,tamRaza,i,ocupado);
                 }
             break;
             }
@@ -494,7 +500,7 @@ for(i=0;i<tam;i++)
             {
             if(strcmpi(mascota[i].tipo,"Raro")==0)
                 {
-                mostrarUnaMascota(mascota,tam,i);
+                mostrarUnaMascota(mascota,tam,raza,tamRaza,i,ocupado);
                 }
             break;
             }

@@ -160,3 +160,5 @@ void mostrarClientesConMasDeUnaMascota(sCliente cliente[],int tamCliente,int ocu
  *
  */
 int cantClientes(sCliente cliente[], int tam , int ocupado);
+
+

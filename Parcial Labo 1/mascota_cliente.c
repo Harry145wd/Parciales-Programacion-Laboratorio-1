@@ -1,9 +1,10 @@
 #include "mascota_cliente.h"
 
-void mostrarClienteConSusMascotas(sMascota mascota[], int tamMascota,sCliente cliente[],int tamCliente,int ocupado)
+void mostrarClienteConSusMascotas(sMascota mascota[], int tamMascota,sCliente cliente[],int tamCliente,sRaza raza[],int tamRaza,int ocupado)
 {
 int i,j;
 int flag;
+int aux;
 char space=' ';
 for(i=0;i<tamCliente;i++)
     {
@@ -23,7 +24,8 @@ for(i=0;i<tamCliente;i++)
                 {
                 printf("|%15s",mascota[j].nombre);
                 printf("|%15s",mascota[j].tipo);
-                printf("|%15s",mascota[j].raza);
+                aux=buscarRaza(raza,tamRaza,ocupado,mascota[i].raza,1);
+                printf("|%15s",raza[aux].nombre);
                 printf("|%4d",mascota[j].edad);
                 printf("|%6.2f",mascota[j].peso);
                 printf("|%4c|",mascota[j].sexo);
@@ -125,12 +127,12 @@ if(aux!=-1)
     printf("Esta es la lista de razas disponibles: \n");
     mostrarRaza(raza,tamRaza,ocupado);
     eleccionRaza=getInt("Ingrese el ID de la raza que quiere usar o -1 para ingresar una nueva raza\n","",0,0,0);
-    if(eleccionRaza=-1)
+    if(eleccionRaza==-1)
         {
         aux2=altaRaza(raza,tamRaza,libre,ocupado);
         if(aux2!=-1)
             {
-            strcpy(mascota[aux].raza,raza[aux2].idRaza);
+            mascota[aux].raza=raza[aux2].idRaza;
             }
         else
             {
@@ -139,11 +141,13 @@ if(aux!=-1)
         }
     else
         {
-        do
+        mascota[aux].raza=getInt("Ingrese el ID de la raza correspondiente: ","",0,0,0);
+        aux3=buscarRaza(raza,tamRaza,ocupado,mascota[aux].raza,1);
+        while(strcmpi(mascota[aux].tipo,raza[aux3].tipo)!=0);
             {
-            mascota[aux].raza=getInt("Ingrese el ID de la raza correspondiente: ","",0,0,0);
+            mascota[aux].raza=getInt("La raza ingresada corresponde a otro tipo de animal\n por favor ingrese una raza que corresponda al tipo del animal que esta ingreasndo : ","",0,0,0);
             aux3=buscarRaza(raza,tamRaza,ocupado,mascota[aux].raza,1);
-            }while(strcmpi(mascota[aux].tipo,raza[aux3].tipo)!=0);
+            }
         }
     mascota[aux].edad=getInt("Ingrese Edad: ","",0,0,0);
     mascota[aux].peso=getFloat("Ingrese Peso: ","",0,0,0);
@@ -166,4 +170,66 @@ if(aux!=-1)
 return retorno;
 }
 
-
+void mostrarCconMMismoSexo(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente,int ocupado)
+{
+int i,j;
+char space=' ';
+char opcion=getChar("Que sexo de mascotas quiere listar? (M o H): ","",0,0,0);
+while(opcion!='M'&& opcion!='H')
+    {
+    opcion=getChar("Ingrese un sexo valido (M o H): ","",0,0,0);
+    }
+switch(opcion)
+    {
+    case 'M':
+        {
+        printf("Clientes que tienen al menos una mascota del sexo Macho:\n");
+        printf("|%8cCLIENTE|%7cAPELLIDO|%6cLOCALIDAD|%8cTELEFONO|\n\n",space,space,space,space);
+        for(i=0;i<tamCliente;i++)
+            {
+            if(cliente[i].estado==ocupado)
+                {
+                for(j=0;j<tamMascota;j++)
+                    {
+                    if(mascota[j].sexo=='M')
+                        {
+                        printf("|%15s",cliente[i].nombre);
+                        printf("|%15s",cliente[i].apellido);
+                        printf("|%15s",cliente[i].localidad);
+                        printf("|%16s|",cliente[i].telefono);
+                        printf("\n");
+                        break;
+                        }
+                    }
+                }
+            }
+        printf("\n");
+        break;
+        }
+    case 'H':
+        {
+        printf("Clientes que tienen al menos una mascota del sexo Hembra:\n");
+        printf("|%8cCLIENTE|%7cAPELLIDO|%6cLOCALIDAD|%8cTELEFONO|\n",space,space,space,space);
+        for(i=0;i<tamCliente;i++)
+            {
+            if(cliente[i].estado==ocupado)
+                {
+                for(j=0;j<tamMascota;j++)
+                    {
+                    if(mascota[j].sexo=='F')
+                        {
+                        printf("|%15s",cliente[i].nombre);
+                        printf("|%15s",cliente[i].apellido);
+                        printf("|%15s",cliente[i].localidad);
+                        printf("|%16s|",cliente[i].telefono);
+                        printf("\n");
+                        break;
+                        }
+                    }
+                }
+            }
+        printf("\n");
+        break;
+        }
+    }
+}
