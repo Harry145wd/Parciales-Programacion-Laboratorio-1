@@ -7,7 +7,7 @@ void hardcodearMascota(sMascota mascota[],int tam)
     int idCliente[20]={1,1,2,2,2,3,3,4,5,5,5};
     char nombre[20][20]={"Michin","Michino","Bobby","Bobinho","Minino","Bonno","Keckleon","Bobifus","Michifus","Michifusino","Buu"};
     char tipo[20][20]={"Gato","Gato","Perro","Perro","Gato","Perro","Raro","Perro","Gato","Gato","Perro"};
-    char raza[20][20]={"Persa","Persa","Calle","Calle","Persa","Pitbull","Reptil","Labrador","Persa","Persa","Bulldog"};
+    int raza[20][20]={1,2,3,4,5,6,1,2,3,4,5};
     int edad[20]={12,3,9,4,16,7,8,14,2,12,8};
     float peso[20]={12.3,13.2,14.33423,14.2,12.4,1.23,14.5,15.6,2.34,12.4,32.50};
     char sexo[20]={'F','F','M','M','M','M','F','M','M','M','M'};
@@ -16,7 +16,7 @@ void hardcodearMascota(sMascota mascota[],int tam)
     for(i=0;i<tam;i++)
         {
         strcpy(mascota[i].tipo,tipo[i]);
-        strcpy(mascota[i].raza,raza[i]);
+        mascota[i].raza=raza[i];
         strcpy(mascota[i].nombre,nombre[i]);
         mascota[i].idMascota=idMascota[i];
         mascota[i].idCliente=idCliente[i];
@@ -27,6 +27,24 @@ void hardcodearMascota(sMascota mascota[],int tam)
         }
 }
 
+void hardcodearRaza(sRaza raza[], int tam)
+{
+char nombre[10][20]={"Persa","siames","labrador","pitbull","lagartija","ardilla"};
+char tipo[10][20]={"Gato","Gato","Perro","Perro","Raro","Raro"};
+char pais[10][20]={"Argentina","Chile","Brasil","Bolivia","Venezuela","Australia"};
+int id[10]={1,2,3,4,5,6};
+int estado[10]={1,1,1,1,1,1};
+int i;
+for(i=0;i<tam;i++)
+{
+strcpy(raza[i].nombre,nombre[i]);
+strcpy(raza[i].tipo,tipo[i]);
+strcpy(raza[i].pais,pais[i]);
+raza[i].estado=estado[i];
+raza[i].idRaza=id[i];
+}
+}
+
 void inicializarMascota(sMascota mascota[],int tam ,int libre)
 {
 int i;
@@ -35,6 +53,196 @@ for(i=0;i<tam;i++)
     mascota[i].estado=libre;
     mascota[i].idMascota=0;
     }
+}
+
+void inicializarRaza(sRaza raza[],int tam)
+{
+int i;
+for(i=0;i<tam;i++)
+    {
+    raza[i].estado=0;
+    raza[i].idRaza=0;
+    }
+}
+
+int generarIDRaza(sRaza raza[],int tam)
+{
+int i;
+int may=0;
+for(i=0;i<tam;i++)
+    {
+    if(i==0 || raza[i].idRaza>may)
+        {
+        may=raza[i].idRaza;
+        }
+    }
+}
+
+int altaRaza(sRaza raza[],int tam, int libre, int ocupado)
+{
+int i;
+int retorno=-1;
+int aux=buscarRazaLibre(raza,tam,libre);
+if(aux!=-1)
+    {
+    getString(raza[aux].nombre,"Ingrese el Nombre: ");
+    getString(raza[aux].pais,"Ingrese el Pais: ");
+    do
+        {
+        getString(raza[aux].tipo,"Ingrese el tipo de animal al que corresponde: ");
+        }while((strcmpi(raza[aux].tipo,"Perro")==0||strcmpi(raza[aux].tipo,"Gato")==0||strcmpi(raza[aux].tipo,"Raro")==0)!=1);
+    raza[aux].idRaza=generarIDRaza(raza,tam);
+    raza[aux].estado=ocupado;
+    printf("Ingresado exitosamente\n");
+    system("color 2F");
+    retorno=aux;
+    }
+else
+    {
+    printf("No hay espacios disponibles\n");
+    }
+return retorno;
+}
+
+int bajaRaza(sRaza raza[],int tam, int libre, int ocupado)
+{
+int aux;
+int aux2=0;
+int i;
+int retorno=-1;
+aux=getInt("Ingrese id de la raza que quiere eliminar: ","",0,0,0);
+for(i=0;i<tam;i++)
+    {
+    if(raza[i].idRaza==aux && raza[i].estado==ocupado)
+        {
+        aux2=1;
+        printf("Se encontro la raza, se dara de baja\n");
+        raza[i].estado=libre;
+        system("color 2F");
+        retorno=i;
+        }
+    }
+if(aux==0)
+{
+printf("no se encontro ninguna raza\n");
+}
+return retorno;
+}
+
+int modificarRaza(sRaza raza[],int tam, int ocupado)
+{
+ int aux;
+int eleccion;
+int retorno=-1;
+aux=buscarRaza(raza,tam,ocupado,0,0);
+    if(aux!=-1)
+        {
+        printf("Se encontro la raza, elija que modificara: \n");
+        do
+            {
+            printf("1.Modificar Nombre\n");
+            printf("2.Modificar Tipo\n");
+            printf("3.Modificar Pais\n");
+            printf("4.Salir\n");
+            eleccion=getInt("Elija una opcion: ","Elija una opcion valida: ",1,4,1);
+            system("cls");
+            switch(eleccion)
+                {
+                case 1:
+                    {
+                    getString(raza[aux].nombre,"Ingrese el Nombre: ");
+                    break;
+                    }
+                case 2:
+                    {
+                    do
+                    {
+                    getString(raza[aux].tipo,"Ingrese el Tipo (Perro,Gato o Raro): ");
+                    }while((strcmpi(raza[aux].tipo,"Perro")==0||strcmpi(raza[aux].tipo,"Gato")==0||strcmpi(raza[aux].tipo,"Raro")==0)!=1);
+                    break;
+                    }
+                case 3:
+                    {
+                     getString(raza[aux].pais,"Ingrese el Pais: ");
+                    break;
+                    }
+                case 4:
+                    {
+                    printf("Menu anterior\n");
+                    break;
+                    }
+                }
+            }while(eleccion!=7);
+        retorno=aux;
+        }
+return retorno;
+}
+
+int buscarRaza(sRaza raza[],int tam, int ocupado,int id, int opcion)
+{
+ int i;
+int retorno = -1;
+int aux;
+if(opcion==0)
+    {
+    aux=getInt("Ingrese una ID: ","",0,0,0);
+    }
+else if(opcion==1)
+    {
+    aux=id;
+    }
+for(i=0;i<tam;i++)
+    {
+    if(raza[i].estado==ocupado && raza[i].idRaza==aux)
+        {
+        if(opcion==0)
+        {
+        printf("Se ha encontrado una coincidencia\n");
+        }
+        retorno = i;
+        break;
+        }
+    }
+return retorno;
+}
+
+
+void mostrarRaza(sRaza raza[],int tam, int ocupado)
+{
+int i;
+char space=' ';
+int aux=0;
+printf("|%9cNOMBRE|%11cTIPO|%11cPAIS|%4cID|\n\n",space,space,space,space);
+for(i=0;i<tam;i++)
+    {
+    if(raza[i].estado==ocupado)
+        {
+        aux=1;
+        printf("|%15s",raza[i].nombre);
+        printf("|%15s",raza[i].tipo);
+        printf("|%15s",raza[i].pais);
+        printf("|%6d",raza[i].idRaza);
+        }
+    }
+if(aux=0)
+    {
+    printf("No se ha ingresado ninguna raza\n");
+    }
+}
+
+int buscarRazaLibre(sRaza raza[],int tam, int libre)
+{
+int i;
+int retorno = -1;
+for(i=0;i<tam;i++)
+    {
+    if(raza[i].estado==libre)
+        {
+        retorno = i;
+        break;
+        }
+    }
+return retorno;
 }
 
 void mostrarMascota(sMascota mascota[],int tam, int ocupado)
@@ -114,7 +322,7 @@ int modificarMascota(sMascota mascota[],int tam,int ocupado)
 int aux;
 int eleccion;
 int retorno=-1;
-aux=buscarMascota(mascota,tam,ocupado);
+aux=buscarMascota(mascota,tam,ocupado,0,0);
     if(aux!=-1)
         {
         printf("Se encontro la mascota, elija que modificara: \n");
@@ -179,16 +387,27 @@ aux=buscarMascota(mascota,tam,ocupado);
 return retorno;
 }
 
-int buscarMascota(sMascota mascota[],int tam,int ocupado)
+int buscarMascota(sMascota mascota[],int tam,int ocupado,int id, int opcion)
 {
 int i;
-int aux=getInt("Ingrese una ID: ","",0,0,0);
 int retorno = -1;
+int aux;
+if(opcion==0)
+    {
+    aux=getInt("Ingrese una ID: ","",0,0,0);
+    }
+else if(opcion==1)
+    {
+    aux=id;
+    }
 for(i=0;i<tam;i++)
     {
-    if(mascota[i].estado==ocupado&& mascota[i].idMascota==aux)
+    if(mascota[i].estado==ocupado && mascota[i].idCliente==aux)
+        {
+        if(opcion==0)
         {
         printf("Se ha encontrado una coincidencia\n");
+        }
         retorno = i;
         break;
         }
@@ -388,3 +607,4 @@ for(i=0;i<tam;i++)
     }
 return contMascotas;
 }
+

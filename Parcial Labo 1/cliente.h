@@ -16,6 +16,8 @@ typedef struct
     int cantMascotas;
 }sCliente;
 
+
+
 /** \brief inicializa valores del el array como el estado y la ID de cada estructura
  *
  * \param sCliente cliente[] Array de estructuras sCliente

@@ -107,9 +107,12 @@ for(i=0;i<tamCliente;i++)
     }
 }
 
-int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente ,int libre ,int ocupado)
+int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente ,sRaza raza[],int tamRaza,int libre ,int ocupado)
 {
 int aux;
+int eleccionRaza;
+int aux2;
+int aux3;
 aux=buscarMascotaLibre(mascota,tamMascota,libre);
 int retorno=-1;
 if(aux!=-1)
@@ -119,7 +122,29 @@ if(aux!=-1)
     {
     getString(mascota[aux].tipo,"Ingrese el Tipo (Perro,Gato o Raro): ");
     }while((strcmpi(mascota[aux].tipo,"Perro")==0||strcmpi(mascota[aux].tipo,"Gato")==0||strcmpi(mascota[aux].tipo,"Raro")==0)!=1);
-    getString(mascota[aux].raza,"Ingrese la Raza: ");
+    printf("Esta es la lista de razas disponibles: \n");
+    mostrarRaza(raza,tamRaza,ocupado);
+    eleccionRaza=getInt("Ingrese el ID de la raza que quiere usar o -1 para ingresar una nueva raza\n","",0,0,0);
+    if(eleccionRaza=-1)
+        {
+        aux2=altaRaza(raza,tamRaza,libre,ocupado);
+        if(aux2!=-1)
+            {
+            strcpy(mascota[aux].raza,raza[aux2].idRaza);
+            }
+        else
+            {
+            mascota[aux].raza=getInt("No se pudo ingresar una raza nueva por favor elija entre las existentes: ","",0,0,0);
+            }
+        }
+    else
+        {
+        do
+            {
+            mascota[aux].raza=getInt("Ingrese el ID de la raza correspondiente: ","",0,0,0);
+            aux3=buscarRaza(raza,tamRaza,ocupado,mascota[aux].raza,1);
+            }while(strcmpi(mascota[aux].tipo,raza[aux3].tipo)!=0);
+        }
     mascota[aux].edad=getInt("Ingrese Edad: ","",0,0,0);
     mascota[aux].peso=getFloat("Ingrese Peso: ","",0,0,0);
     do

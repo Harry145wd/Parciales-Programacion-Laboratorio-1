@@ -79,5 +79,5 @@ void mostrarClientesConMasDeUnaMascota(sCliente cliente[],int tamCliente,int ocu
  * \return int devuelve -1 si no hay estructuras libres o la posicion en el array de la estructura en la que se ingresaron los datos
  *
  */
-int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamCliente ,int libre ,int ocupado);
+int altaMascota(sMascota mascota[],int tamMascota,sCliente cliente[] ,int tamClientes,sRaza raza[],int tamRaza ,int libre ,int ocupado);
 

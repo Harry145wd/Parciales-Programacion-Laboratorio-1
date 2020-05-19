@@ -45,33 +45,33 @@
 
 1589591053 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\harryio.h
 
-1589838510 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\main.c
+1589894011 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"harryio.h"
 	"mascota_cliente.h"
 
-1589837387 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota_cliente.h
+1589893530 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota_cliente.h
 	"mascota.h"
 	"cliente.h"
 
-1589837298 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota.h
+1589893439 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"harryio.h"
 
-1589838491 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\cliente.h
+1589893044 c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\cliente.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"harryio.h"
 
-1589837298 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota.c
+1589893988 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota.c
 	"mascota.h"
 
-1589837909 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota_cliente.c
+1589893654 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\mascota_cliente.c
 	"mascota_cliente.h"
 
 1589838491 source:c:\users\harry\desktop\utn\utn cursada\1er cuatrimestre\laboratorio1-programacion1\misrepos\c\parciales\parciales-programacion-laboratorio-1\parcial labo 1\cliente.c

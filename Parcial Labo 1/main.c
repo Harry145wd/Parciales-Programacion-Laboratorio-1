@@ -7,17 +7,23 @@
 #define OCUPADO 1
 #define CLIENTES 10
 #define MASCOTAS 20
+#define RAZAS 10
 int main()
 {
 int eleccion;
 int eleccionCliente;
 int eleccionMascota;
-sCliente cliente[10];
-sMascota mascota[20];
+sCliente cliente[CLIENTES];
+sMascota mascota[MASCOTAS];
+sRaza raza[RAZAS];
 inicializarCliente(cliente,CLIENTES,LIBRE);
 inicializarMascota(mascota,MASCOTAS,LIBRE);
+inicializarRaza(raza,RAZAS);
+mostrarRaza(raza,RAZAS,OCUPADO);
 hardcodearCliente(cliente,CLIENTES);
 hardcodearMascota(mascota,MASCOTAS);
+hardcodearRaza(raza,RAZAS);
+mostrarRaza(raza,RAZAS,OCUPADO);
 printf("------|| Menu de la veterinaria ||------\n");
 do
     {
@@ -134,9 +140,13 @@ do
                     printf("7.Mostrar Mascotas por tipos\n");
                     printf("8.Mostrar promedio de edad de las Mascotas\n");
                     printf("9.Mostrar promedio de edad de las Mascotas por tipo\n");
-                    printf("10.Volver al menu principal\n");
+                    printf("10.Ingresar Raza\n");
+                    printf("11.Modificar Raza\n");
+                    printf("12.Eliminar Raza\n");
+                    printf("13.Mostrar Raza\n");
+                    printf("14.Volver al menu principal\n");
                     fflush(stdin);
-                    eleccionMascota=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,10,1);
+                    eleccionMascota=getInt("Ingrese la opcion: ","Elija una opcion valida: ",1,14,1);
                     system("cls");
                     system("color 0F");
                     if(aux==0 && eleccionMascota!=1)
@@ -150,7 +160,7 @@ do
                             {
                             printf("Clientes Actuales\n");
                             mostrarCliente(cliente,CLIENTES,OCUPADO);
-                            altaMascota(mascota,MASCOTAS,cliente,CLIENTES,LIBRE,OCUPADO);
+                            altaMascota(mascota,MASCOTAS,cliente,CLIENTES,raza,RAZAS,LIBRE,OCUPADO);
                             break;
                             }
                         case 2:
@@ -196,11 +206,31 @@ do
                             }
                         case 10:
                             {
+                            altaRaza(raza,RAZAS,LIBRE,OCUPADO);
+                            break;
+                            }
+                        case 11:
+                            {
+                            bajaRaza(raza,RAZAS,LIBRE,OCUPADO);
+                            break;
+                            }
+                        case 12:
+                            {
+                            bajaRaza(raza,RAZAS,LIBRE,OCUPADO);
+                            break;
+                            }
+                        case 13:
+                            {
+                            mostrarRaza(raza,RAZAS,OCUPADO);
+                            break;
+                            }
+                        case 14:
+                            {
                             printf("Vuelta al Menu principal\n");
                             break;
                             }
                         }
-                    }while(eleccionMascota!=10);
+                    }while(eleccionMascota!=14);
                 }
             break;
             }

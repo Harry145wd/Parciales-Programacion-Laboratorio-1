@@ -7,7 +7,7 @@ typedef struct
 {
     char nombre[20];
     char tipo[20];
-    char raza[20];
+    int raza;
     int edad;
     float peso;
     char sexo;
@@ -16,6 +16,34 @@ typedef struct
     int idCliente;
     char nombreCliente[20];
 }sMascota;
+
+typedef struct
+{
+int idRaza;
+char nombre[20];
+char pais[20];
+char tipo[20];
+int estado;
+
+}sRaza;
+
+void inicializarRaza(sRaza raza[],int tam);
+
+int generarIDRaza(sRaza raza[],int tam);
+
+int altaRaza(sRaza raza[],int tam, int libre, int ocupado);
+
+int bajaRaza(sRaza raza[],int tam, int libre, int ocupado);
+
+int modificarRaza(sRaza raza[],int tam, int ocupado);
+
+void hardcodearRaza(sRaza raza[], int tam);
+
+int buscarRazaLibre(sRaza raza[],int tam, int libre);
+
+int buscarRaza(sRaza raza[],int tam, int ocupado,int id, int opcion);
+
+
 
 /** \brief inicializa valores del el array como el estado y la ID de cada estructura
  *
@@ -94,7 +122,7 @@ int generarIDMascota(sMascota mascota[],int tam);
  * \return int devuelve -1 si no hay coincidencias o la posicion en el array de la estructura encontrada
  *
  */
-int buscarMascota(sMascota mascota[],int tam,int ocupado);
+int buscarMascota(sMascota mascota[],int tam,int ocupado, int id, int opcion);
 
 /** \brief ordena el array alfabeticamente mediante el valor de tipo
  *
